@@ -2,7 +2,7 @@ class BoardsController < ApplicationController
 before_action :set_target_board, only: %i[show edit update destroy]
 
     def index
-        @boards = Board.all #全件取得はサーバの負荷が大きい
+        @boards = Board.page(params[:page]) #全件取得はサーバの負荷が大きい
     end
 
     def new
@@ -11,7 +11,7 @@ before_action :set_target_board, only: %i[show edit update destroy]
 
     def create
         board = Board.create(board_params)
-
+        flash[:notice] = "「#{board.title}」の掲示板を作成しました" 
         redirect_to board
     end
 
