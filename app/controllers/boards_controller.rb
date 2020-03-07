@@ -30,7 +30,7 @@ before_action :set_target_board, only: %i[show edit update destroy]
 
     def destroy
         @board.delete
-        redirect_to boards_path
+        redirect_to boards_path, flash: {notice: "「#{@board.title}」の掲示板が削除されました"}
     end
 
 
